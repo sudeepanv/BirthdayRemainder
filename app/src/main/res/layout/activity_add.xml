@@ -1,53 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddActivity">
-    <Toolbar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Toolbar"
-        android:title="Birthday !!"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvnamelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="start|center_vertical">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Name"
-        android:inputType="textCapCharacters"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Toolbar" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Name"
+                    android:textColor="@color/themePink"
+                    android:textStyle="bold"
+                    android:inputType="textCapCharacters"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Birthday"
-        android:inputType="date"
-        android:textSize="24dp"
-        android:id="@+id/etbirthday"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etname" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Birthday"
+                android:textStyle="bold"
+                android:textColor="@color/themePink"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:id="@+id/birth" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:inputType="date"
+                android:layout_gravity="center"
+                android:headerBackground="@color/themePink"
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/etbirthday"/>
 
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add_a_photo_24px"
-        android:layout_margin="16dp"
-        android:id="@+id/btimage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etbirthday" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:id="@+id/imageView"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedImage"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:src="@drawable/add_a_photo_24px"
+                android:layout_margin="16dp"
+                android:id="@+id/btimage"
+                android:background="@color/themePink"
+                app:tint="@color/textWhite" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btsave"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textStyle="bold"
+                android:textColor="@color/textWhite"
+                android:layout_margin="16dp"
+                android:text="SAVE"
+                android:background="@color/themePink" />
+        </LinearLayout>
+
+</ScrollView>
