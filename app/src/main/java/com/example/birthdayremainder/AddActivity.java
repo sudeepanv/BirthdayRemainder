@@ -1,10 +1,13 @@
 package com.example.birthdayremainder;
 
+import static android.view.View.GONE;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -63,7 +66,6 @@ public class AddActivity extends AppCompatActivity {
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
 
-
     }
 
     @Override
@@ -74,6 +76,8 @@ public class AddActivity extends AppCompatActivity {
             getContentResolver().takePersistableUriPermission(data.getData(), Intent.FLAG_GRANT_READ_URI_PERMISSION);
             selectedImageUri = data.getData();
             imageView.setImageURI(selectedImageUri);
+            imageView.setVisibility(View.VISIBLE);
+            btimage.setVisibility(GONE);
         }
     }
 
@@ -91,11 +95,15 @@ public class AddActivity extends AppCompatActivity {
             editor.putString("imagePath" + count, imagePath);
             editor.putInt("count", ++count);
             editor.apply();
-            Intent intent = new Intent(AddActivity.this, MainActivity.class);
-            intent.putExtra("count", count);
-            startActivity(intent);
-            finish();
+            switchActivity();
         }
+    }
+
+    private void switchActivity() {
+        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+        intent.putExtra("count", count);
+        startActivity(intent);
+        finish();
     }
 
     public String dateToString() {
@@ -104,5 +112,9 @@ public class AddActivity extends AppCompatActivity {
         return dateFormat.format(date);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        switchActivity();
+    }
 }
