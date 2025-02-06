@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -79,18 +80,22 @@ public class AddActivity extends AppCompatActivity {
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("BirthdayData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name" + count, etname.getText().toString());
-        editor.putString("birthday" + count, dateToString());
-        String imagePath = selectedImageUri != null ? selectedImageUri.toString() : "No Image";
-        Log.e("imagePath", imagePath);
-        editor.putString("imagePath" + count, imagePath);
-        editor.putInt("count", ++count);
-        editor.apply();
-        Intent intent = new Intent(AddActivity.this, MainActivity.class);
-        intent.putExtra("count", count);
-        startActivity(intent);
-        finish();
-
+        if (etname.getText().toString().isEmpty()){
+            Toast.makeText(this,"Name can't be empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            editor.putString("name" + count, etname.getText().toString());
+            editor.putString("birthday" + count, dateToString());
+            String imagePath = selectedImageUri != null ? selectedImageUri.toString() : "No Image";
+            Log.e("imagePath", imagePath);
+            editor.putString("imagePath" + count, imagePath);
+            editor.putInt("count", ++count);
+            editor.apply();
+            Intent intent = new Intent(AddActivity.this, MainActivity.class);
+            intent.putExtra("count", count);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public String dateToString() {
