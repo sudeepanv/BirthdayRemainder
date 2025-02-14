@@ -97,8 +97,18 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("BirthdayData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.d("Dob", "saveData: "+Dob);
         if (etname.getText().toString().isEmpty()){
-            Toast.makeText(this,"Name can't be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"PLEASE ENTER ALL VALUES", Toast.LENGTH_SHORT).show();
+        }
+        else if(Dob==null)
+        {
+            Toast.makeText(this,"PLEASE ENTER DOB", Toast.LENGTH_SHORT).show();
+
+        }
+        else if(selectedImageUri == null)
+        {
+            Toast.makeText(this,"PLEASE SELECT AN IMAGE", Toast.LENGTH_SHORT).show();
         }
         else {
             editor.putString("name" + count, etname.getText().toString());
