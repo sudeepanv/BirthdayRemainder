@@ -2,6 +2,7 @@ package com.example.birthdayremainder;
 
 import static android.view.View.GONE;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -24,15 +25,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     EditText etname;
-    DatePicker etbirthday;
     ImageButton btimage;
     ImageView imageView;
     Button saveButton;
+    Button datepick;
+    String Dob;
     int count;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
@@ -49,7 +52,7 @@ public class AddActivity extends AppCompatActivity {
         });
         count = getIntent().getIntExtra("count", 0);
         etname = findViewById(R.id.etname);
-        etbirthday = findViewById(R.id.etbirthday);
+        datepick = findViewById(R.id.button1);
         btimage = findViewById(R.id.btimage);
         imageView = findViewById(R.id.imageView);
         saveButton = findViewById(R.id.btsave);
@@ -58,6 +61,16 @@ public class AddActivity extends AppCompatActivity {
             openGallery();
         });
         saveButton.setOnClickListener(view -> saveData());
+
+        datepick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                com.example.birthdayremainder.DatePicker datePickFragment;
+                datePickFragment = new com.example.birthdayremainder.DatePicker();
+                datePickFragment.show(getSupportFragmentManager(),"MyAppTheme");
+
+            }
+        });
 
     }
 
@@ -89,7 +102,7 @@ public class AddActivity extends AppCompatActivity {
         }
         else {
             editor.putString("name" + count, etname.getText().toString());
-            editor.putString("birthday" + count, dateToString());
+            editor.putString("birthday" + count,Dob);
             String imagePath = selectedImageUri != null ? selectedImageUri.toString() : "No Image";
             Log.e("imagePath", imagePath);
             editor.putString("imagePath" + count, imagePath);
@@ -106,15 +119,24 @@ public class AddActivity extends AppCompatActivity {
         finish();
     }
 
-    public String dateToString() {
+    public void dateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        Date date = new Date(etbirthday.getYear()-1900, etbirthday.getMonth(), etbirthday.getDayOfMonth());
-        return dateFormat.format(date);
+        Dob = dateFormat.format(date);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         switchActivity();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        Date date = mCalendar.getTime();
+        dateToString(date);
     }
 }
