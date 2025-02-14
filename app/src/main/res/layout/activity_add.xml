@@ -51,15 +51,35 @@
                 android:textStyle="bold"
                 android:textSize="24dp"/>
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="150dp"
-                android:layout_margin="16dp"
-                android:visibility="invisible"
-                android:id="@+id/imageView"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/RoundedImage"/>
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_max="300dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/RoundedImage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:maxHeight="150dp"-->
+<!--                android:layout_margin="16dp"-->
+<!--                android:visibility="invisible"-->
+<!--                android:id="@+id/imageView"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                app:shapeAppearanceOverlay="@style/RoundedImage"/>-->
 
             <ImageButton
                 android:layout_width="match_parent"

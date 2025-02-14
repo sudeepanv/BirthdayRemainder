@@ -18,7 +18,7 @@
             android:textSize="28dp"
             android:textColor="@color/themePink"
             android:layout_gravity="center"
-            android:id="@+id/Toolbar" />
+            android:id="@+id/Toolbar"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
