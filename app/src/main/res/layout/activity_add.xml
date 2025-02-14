@@ -28,7 +28,15 @@
                     android:inputType="textCapWords"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Birthday"
+                android:textColor="@color/themePink"
+                android:layout_marginHorizontal="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"
+                android:singleLine="true" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
