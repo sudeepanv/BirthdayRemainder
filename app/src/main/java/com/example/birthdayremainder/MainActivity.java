@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<DataClass> list;
     RecyclerView.Adapter adapter;
-    int count=1;
+    int count=0;
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -53,10 +53,9 @@ public class MainActivity extends AppCompatActivity {
         list.clear();
 
         SharedPreferences sharedPreferences = getSharedPreferences("BirthdayData", MODE_PRIVATE);
-        count = sharedPreferences.getInt("count", 1); // Get the current count (last added item index)
+        count = sharedPreferences.getInt("count", 0);
 
-        // Loop through the stored data using the count
-        for (int i = 1; i <= count; i++) {
+        for (int i = 0; i <= count; i++) {
             String name = sharedPreferences.getString("name" + i, null);
             String birthday = sharedPreferences.getString("birthday" + i, null);
             String imagePath = sharedPreferences.getString("imagePath" + i, null);
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Notify the adapter that the data set has changed
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setAdapter() {
-        adapter = new Adapter(list);
+        adapter = new Adapter(this,list);
         recyclerView.setAdapter(adapter);
     }
 }
