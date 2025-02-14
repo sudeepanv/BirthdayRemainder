@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/add_24px"
+        android:src="@drawable/baseline_add_24"
         android:id="@+id/floatingActionButton"
         android:layout_margin="40dp"/>
 

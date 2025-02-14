@@ -69,7 +69,7 @@
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@drawable/add_a_photo_24px"
+                android:src="@drawable/baseline_camera_alt_24"
                 android:layout_margin="16dp"
                 android:id="@+id/btimage"
                 android:background="@color/themePink"
