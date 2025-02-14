@@ -46,15 +46,16 @@
                 android:textAlignment="center"
                 android:textSize="20dp"
                 android:id="@+id/birth" />
-            <DatePicker
-                android:layout_width="wrap_content"
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:inputType="date"
-                android:layout_gravity="center"
-                android:headerBackground="@color/themePink"
-                android:nestedScrollingEnabled="true"
-                android:id="@+id/etbirthday"/>
+                android:layout_margin="15dp"
+                android:textColor="@color/textWhite"
+                android:backgroundTint="@color/themePink"
+                android:text="PICK BIRTHDAY"
+                android:textStyle="bold" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="match_parent"
