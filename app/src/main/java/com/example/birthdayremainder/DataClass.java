@@ -1,7 +1,4 @@
 package com.example.birthdayremainder;
-
-import java.util.List;
-
 public class DataClass {
     String name;
     String birthday;

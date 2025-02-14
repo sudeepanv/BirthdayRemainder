@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,8 +29,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class AddActivity extends AppCompatActivity {
     EditText etname;
+    TextView tvbirthday;
     ImageButton btimage;
     ImageView imageView;
     Button saveButton;
@@ -51,7 +52,9 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
             return insets;
         });
         count = getIntent().getIntExtra("count", 0);
+        Log.e("Count","Intent Count: "+count);
         etname = findViewById(R.id.etname);
+        tvbirthday = findViewById(R.id.tvbirthday);
         datepick = findViewById(R.id.button1);
         btimage = findViewById(R.id.btimage);
         imageView = findViewById(R.id.imageView);
@@ -65,10 +68,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         datepick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                com.example.birthdayremainder.DatePicker datePickFragment;
-                datePickFragment = new com.example.birthdayremainder.DatePicker();
-                datePickFragment.show(getSupportFragmentManager(),"MyAppTheme");
-
+                openCalendarDialog();
             }
         });
 
@@ -98,25 +98,16 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         SharedPreferences sharedPreferences = getSharedPreferences("BirthdayData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Log.d("Dob", "saveData: "+Dob);
-        if (etname.getText().toString().isEmpty()){
+        if (etname.getText().toString().isEmpty() || Dob==null || selectedImageUri == null){
             Toast.makeText(this,"PLEASE ENTER ALL VALUES", Toast.LENGTH_SHORT).show();
         }
-        else if(Dob==null)
-        {
-            Toast.makeText(this,"PLEASE ENTER DOB", Toast.LENGTH_SHORT).show();
-
-        }
-        else if(selectedImageUri == null)
-        {
-            Toast.makeText(this,"PLEASE SELECT AN IMAGE", Toast.LENGTH_SHORT).show();
-        }
-        else {
+         else{
+            editor.putInt("count", ++count);
             editor.putString("name" + count, etname.getText().toString());
             editor.putString("birthday" + count,Dob);
-            String imagePath = selectedImageUri != null ? selectedImageUri.toString() : "No Image";
+            String imagePath = selectedImageUri.toString();
             Log.e("imagePath", imagePath);
             editor.putString("imagePath" + count, imagePath);
-            editor.putInt("count", ++count);
             editor.apply();
             switchActivity();
         }
@@ -132,6 +123,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     public void dateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         Dob = dateFormat.format(date);
+        tvbirthday.setText(Dob);
     }
 
     @Override
@@ -139,14 +131,18 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         super.onBackPressed();
         switchActivity();
     }
+    private void openCalendarDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar mCalendar = Calendar.getInstance();
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        Date date = mCalendar.getTime();
-        dateToString(date);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, Year, Month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, Year);
+            calendar.set(Calendar.MONTH, Month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            dateToString(calendar.getTime());
+        }, year, month, day);
+        datePickerDialog.show();
     }
 }

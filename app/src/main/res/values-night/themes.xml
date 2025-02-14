@@ -2,6 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BirthdayRemainder" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/themePink</item>
+        <item name="android:colorButtonNormal">@color/themePink</item>
+
+        <!-- TextView Color -->
+        <item name="android:textColor">@color/textWhite</item>
     </style>
 </resources>

@@ -80,37 +80,35 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemViewHolder> {
     private void deleteData(int position) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("BirthdayData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        int count = sharedPreferences.getInt("count", 0);
-        if (count == 0 || position >= count) {
+        int count = sharedPreferences.getInt("count",0);
+        Log.d("Count", "Count: "+count);
+        Log.d("Position", "Position: "+position);
+        if (count == 0 || position > count) {
             return;
         }
+        editor.remove("name" + position+1);
+        editor.remove("birthday" + position+1);
+        editor.remove("imagePath" + position+1);
 
-        editor.remove("name" + position);
-        editor.remove("birthday" + position);
-        editor.remove("imagePath" + position);
-
-        for (int i = position; i < count - 1; i++) {
-            String nextName = sharedPreferences.getString("name" + (i + 1), null);
-            String nextBirthday = sharedPreferences.getString("birthday" + (i + 1), null);
-            String nextImage = sharedPreferences.getString("imagePath" + (i + 1), null);
-
+        for (int i = position; i < count; i++) {
+            String nextName = sharedPreferences.getString("name" + (i + 2), null);
+            String nextBirthday = sharedPreferences.getString("birthday" + (i + 2), null);
+            String nextImage = sharedPreferences.getString("imagePath" + (i + 2), null);
             if (nextName != null) {
-                editor.putString("name" + i, nextName);
-                editor.putString("birthday" + i, nextBirthday);
-                editor.putString("imagePath" + i, nextImage);
+                editor.putString("name" +(i+1), nextName);
+                editor.putString("birthday" +(i+1), nextBirthday);
+                editor.putString("imagePath" +(i+1), nextImage);
+
             }
         }
-
-        editor.remove("name" + (count - 1));
-        editor.remove("birthday" + (count - 1));
-        editor.remove("imagePath" + (count - 1));
-
-        editor.putInt("count", count - 1);
+        editor.remove("name" + count);
+        editor.remove("birthday" + count);
+        editor.remove("imagePath" + count);
+        editor.putInt("count", --count);
         editor.apply();
-
         list.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position, list.size());
     }
 
 
