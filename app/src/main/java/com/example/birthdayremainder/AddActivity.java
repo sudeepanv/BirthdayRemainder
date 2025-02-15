@@ -137,7 +137,7 @@ public class AddActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, Year, Month, dayOfMonth) -> {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.MyAppTheme, (view, Year, Month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, Year);
             calendar.set(Calendar.MONTH, Month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);

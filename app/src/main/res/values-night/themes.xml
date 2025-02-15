@@ -8,4 +8,12 @@
         <!-- TextView Color -->
         <item name="android:textColor">@color/textWhite</item>
     </style>
+    <style name="MyAppTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="colorPrimaryDark">@color/themePink</item>
+        <item name="android:colorAccent">@color/themePink</item>
+        <item name="colorControlActivated">@color/themePink</item>
+        <item name="colorControlHighlight">@color/themePink</item>
+        <item name="colorPrimaryVariant">@color/themePink</item>
+        <item name="colorOnPrimary">@color/themePink</item>
+    </style>
 </resources>

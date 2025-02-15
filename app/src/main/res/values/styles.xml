@@ -16,12 +16,5 @@
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
-    <style name="MyAppTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
-        <item name="colorPrimary">@color/themePink</item>
-        <item name="colorAccent">@color/themePink</item>-->
-        <item name="colorControlActivated">@color/themePink</item>
-        <item name="colorControlHighlight">@color/themePink</item>
-        <item name="colorPrimaryVariant">@color/themePink</item>
-        <item name="colorOnPrimary">@color/themePink</item>
-    </style>
+
 </resources>
